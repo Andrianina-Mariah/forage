@@ -13,3 +13,17 @@ Formulaire création demande (nom, lieu, demande)
 ** table d'association (status_demande)(utile pour gardé l'historique de chaque demande /manytomany)
 Date: heure:minute
 Springmvc
+
+./gradlew bootRun
+
+Front:(ok)
+- Login user
+- Formulaire de demande (enregistrer dans la table demande)
+    Session user
+- Affichage de la liste des demandes (en fonction du status)
+- Affichage liste status existant + formulaire d'ajout de status + modifier status
+
+Back:
+Model de chaque table (ok)
+CRUD pour tout les tables dans repository 
+

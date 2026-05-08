@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title th:text="${appTitle}">Forage - Demandes</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body class="page">
+	<header class="topbar">
+		<div>
+			<span class="pill">Forage • Suivi</span>
+			<h1>Liste des demandes</h1>
+			<p>Filtrez par statut pour prioriser le traitement.</p>
+		</div>
+		<div class="actions">
+			<a class="btn ghost" href="/demande/new">Nouvelle demande</a>
+			<a class="btn primary" href="/statuts">Gérer les statuts</a>
+		</div>
+	</header>
+
+	<section class="container card">
+		<form class="filter" method="get" action="/demandes">
+			<label>
+				<span>Statut</span>
+				<select name="status">
+					<option value="" th:selected="${selectedStatus == ''}">Tous</option>
+					<option th:each="statut : ${statuts}"
+							th:value="${statut.libelle}"
+							th:text="${statut.libelle}"
+							th:selected="${statut.libelle == selectedStatus}"></option>
+				</select>
+			</label>
+			<button type="submit" class="btn primary">Filtrer</button>
+		</form>
+
+		<div class="table">
+			<div class="table-row table-head">
+				<span>Référence</span>
+				<span>Libellé</span>
+				<span>Commune</span>
+				<span>Statut</span>
+				<span>Date</span>
+			</div>
+			<div class="table-row" th:each="demande : ${demandes}">
+				<span th:text="${demande.reference}">RF-2026-001</span>
+				<span th:text="${demande.libelle}">Libellé</span>
+				<span th:text="${demande.commune}">Commune</span>
+				<span class="tag" th:text="${demande.status}">Nouvelle</span>
+				<span th:text="${demande.dateDemande}">2026-05-08</span>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

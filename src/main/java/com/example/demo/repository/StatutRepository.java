@@ -10,7 +10,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.model.Demande;
+import com.example.demo.model.Statut;
 
 @Repository
 public class StatutRepository {
@@ -23,13 +23,13 @@ public class StatutRepository {
 
 	public Statut save(Statut statut) {
 		String sql = """
-				INSERT INTO statut (libelle_statut)
+				INSERT INTO statut (libelle)
 				VALUES (?)
 				""";
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		jdbcTemplate.update(connection -> {
 			PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			statement.setString(1, statut.getLibelleStatut());
+			statement.setString(1, statut.getLibelle());
 			return statement;
 		}, keyHolder);
 
@@ -42,7 +42,7 @@ public class StatutRepository {
 
 	public Optional<Statut> findById(int id) {
 		String sql = """
-				SELECT id, libelle_statut
+				SELECT id, libelle
 				FROM statut
 				WHERE id = ?
 				""";
@@ -52,9 +52,9 @@ public class StatutRepository {
 
 	public List<Statut> findAll() {
 		String sql = """
-				SELECT id, libelle_statut
+				SELECT id, libelle
 				FROM statut
-				ORDER BY libelle_statut
+				ORDER BY libelle
 				""";
 		return jdbcTemplate.query(sql, this::mapRow);
 	}
@@ -62,11 +62,11 @@ public class StatutRepository {
 	public boolean update(Statut statut) {
 		String sql = """
 				UPDATE statut
-				SET libelle_statut = ?
+				SET libelle = ?
 				WHERE id = ?
 				""";
 		int updated = jdbcTemplate.update(sql,
-			statut.getLibelleStatut(),
+			statut.getLibelle(),
 			statut.getId()
 		);
 		return updated > 0;
@@ -81,7 +81,7 @@ public class StatutRepository {
 	private Statut mapRow(java.sql.ResultSet rs, int rowNum) throws java.sql.SQLException {
 		return new Statut(
 			rs.getInt("id"),
-			rs.getString("libelle_statut"),
+			rs.getString("libelle")
 		);
 	}
 

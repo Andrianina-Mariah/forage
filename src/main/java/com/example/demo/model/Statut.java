@@ -1,20 +1,21 @@
-package model;
+package com.example.demo.model;
 
 
-public class Status {
+public class Statut {
     private int id;
     private String libelle;
 
-    public Status(String libelle) {
+    public Statut(int id, String libelle) {
+        this.id = id;
         this.libelle = libelle;
     }
 
-    public Status(int id, String libelle) {
-        setId(id);
-        setLibelle(libelle);
-    }
 
-    public Status() {
+    public void afficher() {
+        System.out.println(
+            "id: " + this.id
+                + ", nom: " + this.libelle
+        );
     }
 
     public int getId() {
@@ -31,13 +32,5 @@ public class Status {
 
     public void setLibelle(String libelle) {
         this.libelle = libelle;
-    }
-
-
-    public void afficher() {
-        System.out.println(
-            "id: " + this.id
-                + ", nom: " + this.libelle
-        );
     }
 }

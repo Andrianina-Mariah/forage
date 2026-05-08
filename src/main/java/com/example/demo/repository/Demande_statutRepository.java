@@ -10,8 +10,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.model.Demande;
-import com.example.demo.model.Demande_staut;
+import com.example.demo.model.Demande_statut;
 
 
 public class Demande_statutRepository {
@@ -30,7 +29,7 @@ public class Demande_statutRepository {
 		jdbcTemplate.update(connection -> {
 			PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			statement.setInt(1, demande_statut.getTypeDemande());
-			statement.setString(2, demande_statut.getTypeStatut());
+			statement.setInt(2, demande_statut.getTypeStatut());
 			statement.setDate(3, toSqlDate(demande_statut.getDateDebut()));
 			statement.setDate(4, toSqlDate(demande_statut.getDateFin()));
 			return statement;
@@ -62,19 +61,17 @@ public class Demande_statutRepository {
 		return jdbcTemplate.query(sql, this::mapRow);
 	}
 
-	public boolean update(Demande_staut demande_statut) {
+	public boolean update(Demande_statut demande_statut) {
 		String sql = """
 				UPDATE demande_statut
 				SET type_demande = ?, type_statut = ?, date_debut = ?, date_fin = ?
 				WHERE id = ?
 				""";
 		int updated = jdbcTemplate.update(sql,
-			demande_statut.getLibelleDemande(),
-			demande_statut.getIdDemandeur(),
-			demande_statut.getReference(),
-			demande_statut.getLieu(),
-			demande_statut.getIdCommune(),
-			toSqlDate(demande_statut.getDateDemande()),
+			demande_statut.getTypeDemande(),
+			demande_statut.getTypeStatut(),
+			toSqlDate(demande_statut.getDateDebut()),
+			toSqlDate(demande_statut.getDateFin()),
 			demande_statut.getId()
 		);
 		return updated > 0;
@@ -86,13 +83,13 @@ public class Demande_statutRepository {
 	}
 
 	private Demande_statut mapRow(java.sql.ResultSet rs, int rowNum) throws java.sql.SQLException {
-		return new Demande_statut(
-			rs.getDate("date_debut"),
-			rs.getInt("type_demande"),
-			rs.getInt("type_statut"),
-			rs.getInt("id"),
-			rs.getDate("date_fin")
-		);
+		Demande_statut demande_statut = new Demande_statut();
+		demande_statut.setId(rs.getInt("id"));
+		demande_statut.setTypeDemande(rs.getInt("type_demande"));
+		demande_statut.setTypeStatut(rs.getInt("type_statut"));
+		demande_statut.setDateDebut(rs.getDate("date_debut"));
+		demande_statut.setDateFin(rs.getDate("date_fin"));
+		return demande_statut;
 	}
 
 	private Date toSqlDate(java.util.Date date) {

@@ -1,2 +1,15 @@
-mvm controller -> methode list -> mvm service
-Model and view: add object (anarana, objet)
+Forage d'eau 
+- Une personne demande Forage
+(District/région/fokotany)
+Formulaire (nom, date, référence(automatique), lieux, status(pour commencer demande envoyé))
+- Référence status 
+- Demande, ex: - devis (étude)
+               - devis (réalisation)
+- Demande cloturée (date/durée/détail)
+Formulaire création demande (nom, lieu, demande)
+- base.sql:
+    demande
+    status
+** table d'association (status_demande)(utile pour gardé l'historique de chaque demande /manytomany)
+Date: heure:minute
+Springmvc

@@ -3,38 +3,15 @@ package com.example.demo.controller;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
-@SessionAttributes("currentUser")
 public class ViewController {
-
-	@ModelAttribute("currentUser")
-	public Map<String, String> currentUser() {
-		return Map.of("nom", "Rabe", "role", "Demandeur");
-	}
-
-	@GetMapping("/login")
-	public String login(Model model) {
-		model.addAttribute("appTitle", "Forage - Portail" );
-		return "login";
-	}
-
-	@GetMapping("/demande/new")
-	public String demandeForm(Model model) {
-		model.addAttribute("appTitle", "Forage - Nouvelle demande");
-		model.addAttribute("communes", List.of("Ambatolampy", "Antsirabe", "Betafo", "Fianarantsoa"));
-		model.addAttribute("today", LocalDate.now());
-		return "demande-form";
-	}
 
 	@GetMapping("/demandes")
 	public String demandes(@RequestParam(name = "status", required = false) String status,

@@ -4,7 +4,9 @@ USE forage;
 CREATE TABLE client (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(200),
-    mail VARCHAR(200)
+    mail VARCHAR(200),
+    role VARCHAR(50),
+    mot_de_passe VARCHAR(200)
 );
 
 CREATE TABLE statut (
@@ -33,3 +35,8 @@ CREATE TABLE demande_statut (
     FOREIGN KEY (type_demande) REFERENCES demande(id),
     FOREIGN KEY (type_statut) REFERENCES statut(id)
 );
+
+INSERT INTO client (nom, mail, role, mot_de_passe)
+VALUES
+('Admin', 'admin@forage.mg', 'ADMIN', 'admin123'),
+('Rabe', 'rabe@forage.mg', 'DEMANDEUR', 'rabe123');

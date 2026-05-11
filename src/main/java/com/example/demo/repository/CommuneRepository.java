@@ -1,13 +1,17 @@
 package com.example.demo.repository;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.example.demo.model.Commune;
-import com.example.demo.model.District;
 
 
+@Repository
 public class CommuneRepository {
+	private final JdbcTemplate jdbcTemplate;
+
 	public CommuneRepository(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}

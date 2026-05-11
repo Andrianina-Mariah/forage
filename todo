@@ -25,5 +25,9 @@ Front:(ok)
 
 Back:
 Model de chaque table (ok)
-CRUD pour tout les tables dans repository 
-
+CRUD pour tout les tables dans repository (ok)
+Faire matcher liste déroulante formulaire (ok)
+Faire marcher login (ok)
+faire marcher formulaire demande
+Affichage liste demande
+Gestion status

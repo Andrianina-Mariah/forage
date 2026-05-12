@@ -28,6 +28,11 @@ Model de chaque table (ok)
 CRUD pour tout les tables dans repository (ok)
 Faire matcher liste déroulante formulaire (ok)
 Faire marcher login (ok)
-faire marcher formulaire demande
+faire marcher formulaire demande (ok)
 Affichage liste demande
+Associer demande + status
 Gestion status
+Reference automatique
+
+mvn clean package
+mvn spring-boot:run

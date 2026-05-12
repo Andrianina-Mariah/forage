@@ -40,3 +40,15 @@ INSERT INTO client (nom, mail, role, mot_de_passe)
 VALUES
 ('Admin', 'admin@forage.mg', 'ADMIN', 'admin123'),
 ('Rabe', 'rabe@forage.mg', 'DEMANDEUR', 'rabe123');
+
+INSERT INTO statut (libelle)
+VALUES
+('Nouvelle'),
+('Demande de devis d\'étude créée'),
+('Demande de devis d\'étude refusée'),
+('Demande de devis de forage créée'),
+('Demande de devis de forage créée');
+
+INSERT INTO demande_statut (type_demande, type_statut, date_debut, date_fin)
+VALUES
+(1, 1, '2026-05-12', NULL);

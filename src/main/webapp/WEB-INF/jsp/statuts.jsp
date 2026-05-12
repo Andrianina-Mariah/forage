@@ -1,0 +1,68 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title th:text="${appTitle}">Forage - Statuts</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body class="page">
+	<header class="topbar">
+		<div>
+			<span class="pill">Forage • Paramètres</span>
+			<h1>Gestion des statuts</h1>
+			<p>Ajoutez ou modifiez les statuts existants.</p>
+		</div>
+		<a class="btn ghost" href="/demandes">Retour aux demandes</a>
+	</header>
+
+	<main class="container split">
+		<section class="card">
+			<h2>Statuts existants</h2>
+			<div class="list-cards">
+				<div class="mini-card" th:each="statut : ${statuts}">
+					<div>
+						<h3 th:text="${statut.libelle}">Nouvelle</h3>
+						<p>ID: <span th:text="${statut.id}">1</span></p>
+					</div>
+					<button class="btn ghost">Modifier</button>
+				</div>
+			</div>
+		</section>
+
+		<section class="card glass">
+			<h2>Ajouter un statut</h2>
+			<form class="form" action="#" method="post">
+				<label>
+					<span>Libellé</span>
+					<input type="text" name="libelle" placeholder="Ex: En attente" required>
+				</label>
+				<button type="submit" class="btn primary">Ajouter</button>
+			</form>
+
+			<div class="divider"></div>
+
+			<h2>Modifier un statut</h2>
+			<form class="form" action="#" method="post">
+				<label>
+					<span>Statut</span>
+					<select name="statusId">
+						<option th:each="statut : ${statuts}" th:value="${statut.id}" th:text="${statut.libelle}"></option>
+					</select>
+				</label>
+				<label>
+					<span>Nouveau libellé</span>
+					<input type="text" name="newLibelle" placeholder="Ex: Validée">
+				</label>
+				<button type="submit" class="btn primary">Mettre à jour</button>
+			</form>
+		</section>
+	</main>
+</body>
+</html>

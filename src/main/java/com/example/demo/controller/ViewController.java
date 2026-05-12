@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ViewController {
 
-	@GetMapping("/demandes")
+	/*@GetMapping("/demandes")
 	public String demandes(@RequestParam(name = "status", required = false) String status,
 			Model model) {
 		model.addAttribute("appTitle", "Forage - Demandes");
@@ -29,7 +29,7 @@ public class ViewController {
 		model.addAttribute("demandes", demandes);
 		model.addAttribute("selectedStatus", status == null ? "" : status);
 		return "demandes";
-	}
+	}*/
 
 	@GetMapping("/statuts")
 	public String statuts(Model model) {
@@ -41,19 +41,13 @@ public class ViewController {
 	private List<StatusView> statuses() {
 		return List.of(
 				new StatusView(1, "Nouvelle"),
-				new StatusView(2, "En étude"),
-				new StatusView(3, "Approuvée"),
-				new StatusView(4, "Rejetée")
+				new StatusView(2, "Demande de devis d'étude créée"),
+				new StatusView(3, "Demande de devis d'étude refusée"),
+				new StatusView(4, "Demande de devis de forage créée"),
+				new StatusView(5, "Demande de devis de forage refusée")
 		);
 	}
 
-	private List<DemandeView> demandes() {
-		return List.of(
-				new DemandeView("RF-2026-001", "Forage école primaire", "Ambatolampy", "Nouvelle", LocalDate.now().minusDays(1)),
-				new DemandeView("RF-2026-002", "Forage commune", "Betafo", "En étude", LocalDate.now().minusDays(5)),
-				new DemandeView("RF-2026-003", "Forage CSB", "Antsirabe", "Approuvée", LocalDate.now().minusDays(10))
-		);
-	}
 
 	public record StatusView(int id, String libelle) {
 	}

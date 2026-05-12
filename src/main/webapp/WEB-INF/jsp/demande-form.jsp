@@ -50,7 +50,7 @@
 				</label>
 				<label>
 					<span>Date de demande</span>
-					<input type="date" name="date_demande" value="${today}">
+					<input type="date" name="date_demande">
 				</label>
 				<label>
 					<input type="hidden" name="id_demandeur" value="${currentUser.id}">
@@ -74,7 +74,7 @@
 			</ul>
 			<div class="note">
 				<p>Connexion à la session utilisateur prévue via Spring MVC + SessionAttributes.</p>
-				<a class="link" href="/demandes">Voir toutes les demandes</a>
+				<a class="link" href="/demande/list">Voir toutes les demandes</a>
 			</div>
 		</aside>
 	</main>

@@ -2,7 +2,6 @@
 /home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/controller/AuthController.java
 /home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/controller/CurrentUserAdvice.java
 /home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/controller/DemandeController.java
-/home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/controller/HelloController.java
 /home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/controller/ViewController.java
 /home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/model/Client.java
 /home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/model/Commune.java

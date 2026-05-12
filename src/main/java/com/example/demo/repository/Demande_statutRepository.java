@@ -8,9 +8,11 @@ import java.util.Optional;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 
 import com.example.demo.model.Demande_statut;
 
+@Repository
 public class Demande_statutRepository {
 	private final JdbcTemplate jdbcTemplate;
 

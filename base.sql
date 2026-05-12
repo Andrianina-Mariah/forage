@@ -47,8 +47,26 @@ VALUES
 ('Demande de devis d\'étude créée'),
 ('Demande de devis d\'étude refusée'),
 ('Demande de devis de forage créée'),
-('Demande de devis de forage créée');
+('Demande de devis de forage refusée');
 
 INSERT INTO demande_statut (type_demande, type_statut, date_debut, date_fin)
 VALUES
 (1, 1, '2026-05-12', NULL);
+
+CREATE TABLE devis (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    idDemande INT,
+    type VARCHAR(50),
+    date DATE,
+    description TEXT,
+    FOREIGN KEY (idDemande) REFERENCES demande(id)
+);
+
+CREATE TABLE devis_detail (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    idDevis INT,
+    libelle VARCHAR(200),
+    quantite DECIMAL(10, 2),
+    prix_unitaire DECIMAL(10, 2),
+    FOREIGN KEY (idDevis) REFERENCES devis(id)
+);

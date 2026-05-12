@@ -16,6 +16,7 @@ Springmvc
 
 ./gradlew bootRun
 
+Partie 1
 Front:(ok)
 - Login user
 - Formulaire de demande (enregistrer dans la table demande)
@@ -29,10 +30,27 @@ CRUD pour tout les tables dans repository (ok)
 Faire matcher liste déroulante formulaire (ok)
 Faire marcher login (ok)
 faire marcher formulaire demande (ok)
-Affichage liste demande
-Associer demande + status
+Affichage liste demande (ok)
+Associer demande + status (ok)
 Gestion status
 Reference automatique
 
 mvn clean package
 mvn spring-boot:run
+
+Partie 2
+Table:
+- devis(id, idDemande, type(étude/réalisation), date, détail)(ok)
+- devis_detail(id, idDevis, libelle, quantité, prix_unitaire)(ok)
+Front:
+- formulaire de devis aprés avoir sélectionné une demande (ok)
+    - il faut entrer les détails du devis dans une table javascript (pas enregistrer dans la base avant que je ne clique sur enregistrer et du coup il y à les options supprimer/modifier/ajouter ligne)
+- Affichage de la liste des devis (en fonction du type) (ok)
+- Affichage de la liste des détails de chaque devis (ok)
+Back:
+- Model de chaque table (ok)
+- CRUD pour tout les tables dans repository
+- faire marcher formulaire de devis
+- Affichage de la liste des devis (en fonction du type)
+- Affichage de la liste des détails de chaque devis
+- Associer devis + demande

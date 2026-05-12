@@ -1,7 +1,8 @@
 package com.example.demo.controller;
 
+import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,8 @@ import com.example.demo.repository.*;
 public class DemandeController {
 	private final CommuneRepository communeRepository;
 	private final DemandeRepository demandeRepository;
-	private final Demande_statut demande_statutRepository;
+	private final Demande_statutRepository demande_statutRepository;
+	private static final int DEFAULT_STATUT_ID = 1;
 
 	public DemandeController(CommuneRepository communeRepository, DemandeRepository demandeRepository, Demande_statutRepository demande_statutRepository) {
 		this.communeRepository = communeRepository;
@@ -43,12 +45,15 @@ public class DemandeController {
 			@RequestParam("id_demandeur") int idDemandeur,
 			@RequestParam("id_commune") int idCommune,
 			@RequestParam("libelle_demande") String libelleDemande,
-			@RequestParam("date_demande") Date date_demande,
+			@RequestParam(name = "date_demande", required = false)
+			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateDemande,
 			Model model) {
-		Demande demande = new Demande(date_demande, 0, idCommune, idDemandeur, libelleDemande, lieu, reference);
+		LocalDate effectiveDate = dateDemande != null ? dateDemande : LocalDate.now();
+		Date sqlDate = Date.valueOf(effectiveDate);
+		Demande demande = new Demande(sqlDate, 0, idCommune, idDemandeur, libelleDemande, lieu, reference);
 		demandeRepository.save(demande);
-		Demande_statut demande_statut = new Demande_statut(date_demande, NULL, id_demande, id_statut);
-		Demande_statutRepository.save(demande_statut);
+		Demande_statut demandeStatut = new Demande_statut(sqlDate, null, 0, demande.getId(), DEFAULT_STATUT_ID);
+		demande_statutRepository.save(demandeStatut);
 		return "redirect:/demande/new";
 	}
 	

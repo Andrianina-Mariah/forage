@@ -2,12 +2,15 @@
 /home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/controller/AuthController.java
 /home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/controller/CurrentUserAdvice.java
 /home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/controller/DemandeController.java
+/home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/controller/DevisController.java
 /home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/controller/StatutController.java
 /home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/controller/ViewController.java
 /home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/model/Client.java
 /home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/model/Commune.java
 /home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/model/Demande.java
 /home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/model/Demande_statut.java
+/home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/model/Devis.java
+/home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/model/Devis_detail.java
 /home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/model/District.java
 /home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/model/Region.java
 /home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/model/Statut.java
@@ -15,6 +18,8 @@
 /home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/repository/CommuneRepository.java
 /home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/repository/DemandeRepository.java
 /home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/repository/Demande_statutRepository.java
+/home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/repository/DevisRepository.java
+/home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/repository/Devis_detailRepository.java
 /home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/repository/DistrictRepository.java
 /home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/repository/RegionRepository.java
 /home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/repository/StatutRepository.java

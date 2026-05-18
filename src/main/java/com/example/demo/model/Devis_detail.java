@@ -15,6 +15,10 @@ public class Devis_detail {
         this.quantite = quantite;
     }
 
+    public Devis_detail(String libelle, double quantite, double prix, int idDevis) {
+        this(0, idDevis, libelle, prix, quantite);
+    }
+
     public int getId() {
         return id;
     }

@@ -2,6 +2,7 @@ package com.example.demo.repository;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -80,6 +81,11 @@ public class Demande_statutRepository {
 	public boolean deleteById(int id) {
 		String sql = "DELETE FROM demande_statut WHERE id = ?";
 		return jdbcTemplate.update(sql, id) > 0;
+	}
+
+	public int closeOpenStatut(int typeDemande, LocalDate dateFin) {
+		String sql = "UPDATE demande_statut SET date_fin = ? WHERE type_demande = ? AND date_fin IS NULL";
+		return jdbcTemplate.update(sql, java.sql.Date.valueOf(dateFin), typeDemande);
 	}
 
 	private Demande_statut mapRow(java.sql.ResultSet rs, int rowNum) throws java.sql.SQLException {

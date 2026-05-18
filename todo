@@ -49,8 +49,8 @@ Front:
 - Affichage de la liste des détails de chaque devis (ok)
 Back:
 - Model de chaque table (ok)
-- CRUD pour tout les tables dans repository
-- faire marcher formulaire de devis
+- CRUD pour tout les tables dans repository(ok)
+- faire marcher formulaire de devis (ok)
 - Affichage de la liste des devis (en fonction du type)
 - Affichage de la liste des détails de chaque devis
 - Associer devis + demande

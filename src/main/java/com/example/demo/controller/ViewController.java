@@ -38,18 +38,6 @@ public class ViewController {
 		return "statuts";
 	}
 
-	@GetMapping("/devis/new")
-	public String devisForm(Model model) {
-		model.addAttribute("appTitle", "Forage - Nouveau devis");
-		return "devis-form";
-	}
-
-	@GetMapping("/devis/list")
-	public String devisList(Model model) {
-		model.addAttribute("appTitle", "Forage - Devis");
-		return "devis-list";
-	}
-
 	@GetMapping("/devis/detail")
 	public String devisDetail(Model model) {
 		model.addAttribute("appTitle", "Forage - Détail devis");

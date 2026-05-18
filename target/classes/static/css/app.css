@@ -152,6 +152,10 @@ body {
 	grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.form .full-width {
+	grid-column: 1 / -1;
+}
+
 .form label {
 	display: flex;
 	flex-direction: column;
@@ -161,13 +165,19 @@ body {
 }
 
 .form input,
-.form select {
+.form select,
+.form textarea {
 	padding: 12px 14px;
 	border-radius: 12px;
 	border: 1px solid #dfe5ee;
 	background: #fff;
 	color: var(--text);
 	font-size: 15px;
+}
+
+.form textarea {
+	min-height: 90px;
+	resize: vertical;
 }
 
 .form-actions {
@@ -276,6 +286,8 @@ body {
 	border-radius: 10px;
 	border: 1px solid #dfe5ee;
 	font-size: 14px;
+	background: #fff;
+	color: var(--text);
 }
 
 .table-row .total-cell {
@@ -348,12 +360,24 @@ body {
 .total-card {
 	margin-top: 16px;
 	background: #eef6f2;
-	padding: 16px 20px;
-	border-radius: 14px;
+	padding: 12px 16px;
+	border-radius: 12px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	font-size: 16px;
+	font-size: 15px;
+}
+
+.link-row {
+	margin-top: 16px;
+}
+
+.table {
+	gap: 16px;
+}
+
+.table-row.cols-6 {
+	grid-template-columns: 2fr 1fr 1fr 1.2fr 1fr 0.9fr;
 }
 
 @media (max-width: 960px) {

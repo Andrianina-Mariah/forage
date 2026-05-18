@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -15,7 +16,6 @@
 		<div>
 			<span class="pill">Forage • Devis</span>
 			<h1>Créer un devis</h1>
-			<p>Ajoutez des lignes au devis avant d’enregistrer.</p>
 		</div>
 		<div class="user-chip">
 			<span>${currentUser.nom}</span>
@@ -23,38 +23,37 @@
 		</div>
 	</header>
 
-	<main class="container split">
+	<main class="container">
 		<section class="card">
 			<h2>Informations du devis</h2>
-			<form class="form grid" action="#" method="post" onsubmit="return false;">
+			<form class="form grid" action="/devis" method="post">
 				<label>
 					<span>Demande sélectionnée</span>
 					<select name="id_demande">
-						<option>RF-2026-001 • Forage école primaire</option>
-						<option>RF-2026-002 • Forage centre de santé</option>
-						<option>RF-2026-003 • Forage village Andranomena</option>
+						<c:forEach var="demande" items="${demandes}">
+							<option value="${demande.id}">${demande.reference} • ${demande.libelleDemande}</option>
+						</c:forEach>
 					</select>
 				</label>
 				<label>
 					<span>Type de devis</span>
-					<select name="type_devis">
+					<select name="type">
 						<option value="etude">Étude</option>
 						<option value="realisation">Réalisation</option>
 					</select>
 				</label>
 				<label>
 					<span>Date du devis</span>
-					<input type="date" name="date_devis">
+					<input type="date" name="date">
 				</label>
 				<label>
-					<span>Référence devis</span>
-					<input type="text" name="reference_devis" placeholder="DV-2026-001">
+					<span>Description du devis</span>
+					<textarea name="description" rows="3" placeholder="Détails généraux du devis"></textarea>
 				</label>
-			</form>
 
-			<div class="divider"></div>
+			<div class="divider full-width"></div>
 
-			<div class="section-header">
+			<div class="section-header full-width">
 				<div>
 					<h3>Détails du devis</h3>
 					<p class="muted">Les lignes sont stockées en mémoire tant que vous n’enregistrez pas.</p>
@@ -65,7 +64,7 @@
 				</div>
 			</div>
 
-			<div class="table" id="devisTable">
+			<div class="table full-width" id="devisTable">
 				<div class="table-row table-head cols-6">
 					<span>Libellé</span>
 					<span>Quantité</span>
@@ -76,28 +75,20 @@
 				</div>
 			</div>
 
-			<div class="total-card">
+			<div class="total-card full-width">
 				<span>Total estimé</span>
 				<strong id="totalGlobal">Ar 0</strong>
 			</div>
 
-			<div class="form-actions">
-				<button type="button" class="btn primary">Enregistrer</button>
-				<button type="button" class="btn ghost">Annuler</button>
+			<div class="form-actions full-width">
+				<button type="submit" class="btn primary">Enregistrer</button>
+				<button type="reset" class="btn ghost">Annuler</button>
 			</div>
-		</section>
-
-		<aside class="card glass">
-			<h3>Rappel</h3>
-			<ul class="list">
-				<li><strong>devis</strong> (id, idDemande, type, date)</li>
-				<li><strong>devis_detail</strong> (id, idDevis, libellé, quantité, prix_unitaire)</li>
-			</ul>
-			<div class="note">
-				<p>Vous pourrez filtrer les devis par type et consulter chaque détail.</p>
+		</form>
+			<div class="link-row">
 				<a class="link" href="/devis/list">Voir la liste des devis</a>
 			</div>
-		</aside>
+		</section>
 	</main>
 
 	<script>
@@ -127,10 +118,10 @@
 			row.element.className = "table-row cols-6";
 			row.element.innerHTML = `
 				<div class="cell">
-					<input type="text" placeholder="Ex: Étude hydrogéologique" value="${row.libelle}">
+					<input type="text" name="libelle" placeholder="Ex: Étude hydrogéologique" value="${row.libelle}">
 				</div>
 				<div class="cell">
-					<input type="number" min="1" value="${row.quantite}">
+					<input type="number" name="quantite" min="1" value="${row.quantite}">
 				</div>
 				<div class="cell">
 					<select>
@@ -141,7 +132,7 @@
 					</select>
 				</div>
 				<div class="cell">
-					<input type="number" min="0" value="${row.prix}">
+					<input type="number" name="prix_unitaire" min="0" value="${row.prix}">
 				</div>
 				<div class="cell total-cell">Ar 0</div>
 				<div class="cell actions-cell">

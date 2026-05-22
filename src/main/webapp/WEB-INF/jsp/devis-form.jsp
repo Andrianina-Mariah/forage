@@ -44,7 +44,7 @@
 				</label>
 				<label>
 					<span>Date du devis</span>
-					<input type="date" name="date">
+					<input type="datetime-local" name="date">
 				</label>
 				<label>
 					<span>Description du devis</span>

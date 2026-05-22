@@ -50,7 +50,7 @@
 				</label>
 				<label>
 					<span>Date de demande</span>
-					<input type="date" name="date_demande">
+					<input type="datetime-local" name="date_demande">
 				</label>
 				<label>
 					<input type="hidden" name="id_demandeur" value="${currentUser.id}">
@@ -70,7 +70,7 @@
 				<li><strong>reference</strong> (unique)</li>
 				<li><strong>lieu_demande</strong> (varchar 200)</li>
 				<li><strong>id_commune</strong> (int)</li>
-				<li><strong>date_demande</strong> (date)</li>
+				<li><strong>date_demande</strong> (datetime)</li>
 			</ul>
 			<div class="note">
 				<a class="link" href="/devis/new">Entrer nouveau devis</a>				

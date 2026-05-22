@@ -84,7 +84,7 @@ public class Demande {
         return dateDemande;
     }
 
-    public void setDateDemande(Date dateDemande) {
+    public void setTimestampDemande(Date dateDemande) {
         this.dateDemande = dateDemande;
     }
 

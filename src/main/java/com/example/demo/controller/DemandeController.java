@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
-import java.sql.Date;
-import java.time.LocalDate;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +29,7 @@ public class DemandeController {
 	public String demandeForm(Model model) {
 		model.addAttribute("appTitle", "Forage - Nouvelle demande");
 		model.addAttribute("communes", communeRepository.findAll());
-		model.addAttribute("today", LocalDate.now());
+		model.addAttribute("today", LocalDateTime.now());
 		return "demande-form";
 	}
 	
@@ -46,13 +46,13 @@ public class DemandeController {
 			@RequestParam("id_commune") int idCommune,
 			@RequestParam("libelle_demande") String libelleDemande,
 			@RequestParam(name = "date_demande", required = false)
-			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateDemande,
+			@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm") LocalDateTime dateDemande,
 			Model model) {
-		LocalDate effectiveDate = dateDemande != null ? dateDemande : LocalDate.now();
-		Date sqlDate = Date.valueOf(effectiveDate);
-		Demande demande = new Demande(sqlDate, 0, idCommune, idDemandeur, libelleDemande, lieu, reference);
+		LocalDateTime effectiveDate = dateDemande != null ? dateDemande : LocalDateTime.now();
+		java.sql.Timestamp sqlTimestamp = java.sql.Timestamp.valueOf(effectiveDate);
+		Demande demande = new Demande(sqlTimestamp, 0, idCommune, idDemandeur, libelleDemande, lieu, reference);
 		demandeRepository.save(demande);
-		Demande_statut demandeStatut = new Demande_statut(sqlDate, null, 0, demande.getId(), DEFAULT_STATUT_ID);
+		Demande_statut demandeStatut = new Demande_statut(sqlTimestamp, null, 0, demande.getId(), DEFAULT_STATUT_ID);
 		demande_statutRepository.save(demandeStatut);
 		return "redirect:/demande/new";
 	}
@@ -61,7 +61,7 @@ public class DemandeController {
 	public String demandeList(Model model) {
 		model.addAttribute("appTitle", "Forage - Liste demande");
 		model.addAttribute("demandes", demandeRepository.findAll());
-		model.addAttribute("today", LocalDate.now());
+		model.addAttribute("today", LocalDateTime.now());
 		return "demandes";
 	}
 }

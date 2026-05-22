@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -50,7 +50,7 @@
 					<span>${demande.libelleDemande}</span>
 					<span>${demande.nomCommune}</span>
 					<span class="tag">${demande.lieu}</span>
-					<span>${demande.dateDemande}</span>
+					<span><fmt:formatDate value="${demande.dateDemande}" pattern="dd/MM/yyyy HH:mm" /></span>
 				</div>
 			</c:forEach>
 		</div>

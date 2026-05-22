@@ -21,7 +21,7 @@ CREATE TABLE demande (
     reference VARCHAR(200) UNIQUE,
     lieu_demande VARCHAR(200),
     id_commune INT,
-    date_demande DATE,
+    date_demande DATETIME NOT NULL,
     FOREIGN KEY (id_commune) REFERENCES commune(id),
     FOREIGN KEY (id_demandeur) REFERENCES client(id)
 );
@@ -30,8 +30,8 @@ CREATE TABLE demande_statut (
     id INT PRIMARY KEY AUTO_INCREMENT,
     type_demande INT,
     type_statut INT,
-    date_debut DATE,
-    date_fin DATE,
+    date_debut DATETIME NOT NULL,
+    date_fin DATETIME,
     FOREIGN KEY (type_demande) REFERENCES demande(id),
     FOREIGN KEY (type_statut) REFERENCES statut(id)
 );
@@ -57,7 +57,7 @@ CREATE TABLE devis (
     id INT PRIMARY KEY AUTO_INCREMENT,
     idDemande INT,
     type VARCHAR(50),
-    date DATE,
+    date DATETIME NOT NULL,
     description TEXT,
     FOREIGN KEY (idDemande) REFERENCES demande(id)
 );
@@ -70,3 +70,13 @@ CREATE TABLE devis_detail (
     prix_unitaire DECIMAL(10, 2),
     FOREIGN KEY (idDevis) REFERENCES devis(id)
 );
+
+ALTER TABLE demande
+MODIFY COLUMN date_demande DATETIME NOT NULL;
+
+ALTER TABLE demande_statut
+MODIFY COLUMN date_debut DATETIME NOT NULL,
+MODIFY COLUMN date_fin DATETIME;
+
+ALTER TABLE devis
+MODIFY COLUMN date DATETIME NOT NULL;

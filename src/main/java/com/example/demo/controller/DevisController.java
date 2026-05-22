@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
-import java.time.LocalDate;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -30,7 +31,7 @@ public class DevisController {
     public String devisForm(Model model) {
         model.addAttribute("appTitle", "Forage - Nouveau devis");
         model.addAttribute("demandes", demandeRepository.findAll());
-        model.addAttribute("today", LocalDate.now());
+        model.addAttribute("today", LocalDateTime.now());
         return "devis-form";
     }
 
@@ -39,12 +40,12 @@ public class DevisController {
         @RequestParam("type") String type,
         @RequestParam(name = "description", required = false, defaultValue = "") String description,
         @RequestParam(name = "date", required = false)
-        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+        @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") LocalDateTime date,
         @RequestParam(name = "libelle", required = false) List<String> libelles,
         @RequestParam(name = "quantite", required = false) List<Double> quantites,
         @RequestParam(name = "prix_unitaire", required = false) List<Double> prixUnitaires,
         Model model) {
-        LocalDate resolvedDate = (date != null) ? date : LocalDate.now();
+        LocalDateTime resolvedDate = (date != null) ? date : LocalDateTime.now();
         Devis devis = new Devis(resolvedDate, description, 0, idDemande, type);
         devisRepository.save(devis);
         if (libelles != null && quantites != null && prixUnitaires != null) {
@@ -62,7 +63,7 @@ public class DevisController {
         }
         demande_statutRepository.closeOpenStatut(idDemande, resolvedDate);
         int statutId = "realisation".equalsIgnoreCase(type) ? 4 : 2;
-        Demande_statut statut = new Demande_statut(java.sql.Date.valueOf(resolvedDate), null, 0, idDemande, statutId);
+        Demande_statut statut = new Demande_statut(java.sql.Timestamp.valueOf(resolvedDate), null, 0, idDemande, statutId);
         demande_statutRepository.save(statut);
         return "redirect:/devis/new";
     }

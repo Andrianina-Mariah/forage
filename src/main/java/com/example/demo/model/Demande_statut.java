@@ -47,7 +47,7 @@ public class Demande_statut {
         return dateDebut;
     }
 
-    public void setDateDebut(Date dateDebut) {
+    public void setTimestampDebut(Date dateDebut) {
         this.dateDebut = dateDebut;
     }
 
@@ -55,7 +55,7 @@ public class Demande_statut {
         return dateFin;
     }
 
-    public void setDateFin(Date dateFin) {
+    public void setTimestampFin(Date dateFin) {
         this.dateFin = dateFin;
     }
 }

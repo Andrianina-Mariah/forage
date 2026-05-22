@@ -1,15 +1,15 @@
 package com.example.demo.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Devis {
     private int id;
     private int idDemande;
     private String type;
-    private java.time.LocalDate date;
+    private java.time.LocalDateTime date;
     private String description;
 
-    public Devis(LocalDate date, String description, int id, int idDemande, String type) {
+    public Devis(LocalDateTime date, String description, int id, int idDemande, String type) {
         this.date = date;
         this.description = description;
         this.id = id;
@@ -41,11 +41,11 @@ public class Devis {
         this.type = type;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setTimestamp(LocalDateTime date) {
         this.date = date;
     }
 

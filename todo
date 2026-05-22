@@ -59,6 +59,7 @@ fonctionnalité encore à ameliorer:
 - update automatique pour différent devis
 - liste demande afficher nom commune + status actuelle
 - afficher table demande_statut
+- Session utilisateur garder sur tout les pages le même user
 
 Partie 3
 Front:
@@ -66,6 +67,6 @@ Front:
 - formulaire pour modifier une ligne dans demande_statut
 
 Back:
-- ajouter heure:minute à la date
-
-SELECT demande.id, demande.libelle_demande, demande.id_demandeur, demande.reference, demande.lieu_demande, demande.id_commune, demande.date_demande, commune.nom FROM demande JOIN commune ON commune.id=demande.id_commune ORDER BY demande.date_demande DESC;
+- ajouter heure:minute à la date (ok)
+- modifier la table demande_statut pour ajouter la colonne observation
+- ajouter table parametre (id_statut1, id_statut2, durée, alerte)

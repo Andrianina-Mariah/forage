@@ -5,7 +5,8 @@ import java.util.List;
 import java.sql.Date;
 import java.util.Optional;
 import java.sql.Statement;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -32,7 +33,7 @@ public class DevisRepository {
 			PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			statement.setInt(1, devis.getIdDemande());
 			statement.setString(2, devis.getType());
-			statement.setDate(3, java.sql.Date.valueOf(devis.getDate()));
+			statement.setTimestamp(3, java.sql.Timestamp.valueOf(devis.getDate()));
 			statement.setString(4, devis.getDescription());
 			return statement;
 		}, keyHolder);
@@ -72,7 +73,7 @@ public class DevisRepository {
 		int updated = jdbcTemplate.update(sql,
 			devis.getIdDemande(),
 			devis.getType(),
-			java.sql.Date.valueOf(devis.getDate()),
+			java.sql.Timestamp.valueOf(devis.getDate()),
 			devis.getDescription(),
 			devis.getId()
 		);
@@ -85,7 +86,8 @@ public class DevisRepository {
 	}
 
 	private Devis mapRow(java.sql.ResultSet rs, int rowNum) throws java.sql.SQLException {
-		LocalDate date = rs.getDate("date").toLocalDate();
+		Timestamp timestamp = rs.getTimestamp("date");
+		LocalDateTime date = timestamp.toLocalDateTime();
 		return new Devis(
 			date,
 			rs.getString("description"),
@@ -95,11 +97,11 @@ public class DevisRepository {
 		);
 	}
 
-	private Date toSqlDate(java.util.Date date) {
+	private Timestamp toSqlTimestamp(LocalDateTime date) {
 		if (date == null) {
 			return null;
 		}
-		return new Date(date.getTime());
+		return Timestamp.valueOf(date);
 	}
   
 }

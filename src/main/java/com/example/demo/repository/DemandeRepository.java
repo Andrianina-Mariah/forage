@@ -1,6 +1,6 @@
 package com.example.demo.repository;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
@@ -35,7 +35,7 @@ public class DemandeRepository {
 			statement.setString(3, demande.getReference());
 			statement.setString(4, demande.getLieu());
 			statement.setInt(5, demande.getIdCommune());
-			statement.setDate(6, toSqlDate(demande.getDateDemande()));
+			statement.setTimestamp(6, toSqlTimestamp(demande.getDateDemande()));
 			return statement;
 		}, keyHolder);
 
@@ -48,8 +48,8 @@ public class DemandeRepository {
 
 	public Optional<Demande> findById(int id) {
 		String sql = """
-				SELECT id, libelle_demande, id_demandeur, reference, lieu_demande, id_commune, date_demande
-				FROM demande
+				SELECT demande.*, commune.nom as nom_commune
+				FROM demande JOIN commune ON commune.id = demande.id_commune
 				WHERE id = ?
 				""";
 		List<Demande> result = jdbcTemplate.query(sql, this::mapRow, id);
@@ -77,7 +77,7 @@ public class DemandeRepository {
 			demande.getReference(),
 			demande.getLieu(),
 			demande.getIdCommune(),
-			toSqlDate(demande.getDateDemande()),
+			toSqlTimestamp(demande.getDateDemande()),
 			demande.getId()
 		);
 		return updated > 0;
@@ -91,7 +91,7 @@ public class DemandeRepository {
 	private Demande mapRow(java.sql.ResultSet rs, int rowNum) throws java.sql.SQLException {
 		return new Demande(
 			rs.getString("nom_commune"),
-			rs.getDate("date_demande"),
+			rs.getTimestamp("date_demande"),
 			rs.getInt("id"),
 			rs.getInt("id_commune"),
 			rs.getInt("id_demandeur"),
@@ -101,10 +101,10 @@ public class DemandeRepository {
 		);
 	}
 
-	private Date toSqlDate(java.util.Date date) {
+	private Timestamp toSqlTimestamp(java.util.Date date) {
 		if (date == null) {
 			return null;
 		}
-		return new Date(date.getTime());
+		return new Timestamp(date.getTime());
 	}
 }

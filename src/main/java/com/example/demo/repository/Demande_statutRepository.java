@@ -1,8 +1,9 @@
 package com.example.demo.repository;
-import java.sql.Date;
+
 import java.sql.PreparedStatement;
 import java.sql.Statement;
-import java.time.LocalDate;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,8 +32,8 @@ public class Demande_statutRepository {
 			PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			statement.setInt(1, demande_statut.getTypeDemande());
 			statement.setInt(2, demande_statut.getTypeStatut());
-			statement.setDate(3, toSqlDate(demande_statut.getDateDebut()));
-			statement.setDate(4, toSqlDate(demande_statut.getDateFin()));
+			statement.setTimestamp(3, toSqlTimestamp(demande_statut.getDateDebut()));
+			statement.setTimestamp(4, toSqlTimestamp(demande_statut.getDateFin()));
 			return statement;
 		}, keyHolder);
 
@@ -71,8 +72,8 @@ public class Demande_statutRepository {
 		int updated = jdbcTemplate.update(sql,
 			demande_statut.getTypeDemande(),
 			demande_statut.getTypeStatut(),
-			toSqlDate(demande_statut.getDateDebut()),
-			toSqlDate(demande_statut.getDateFin()),
+			toSqlTimestamp(demande_statut.getDateDebut()),
+			toSqlTimestamp(demande_statut.getDateFin()),
 			demande_statut.getId()
 		);
 		return updated > 0;
@@ -83,9 +84,9 @@ public class Demande_statutRepository {
 		return jdbcTemplate.update(sql, id) > 0;
 	}
 
-	public int closeOpenStatut(int typeDemande, LocalDate dateFin) {
+	public int closeOpenStatut(int typeDemande, LocalDateTime dateFin) {
 		String sql = "UPDATE demande_statut SET date_fin = ? WHERE type_demande = ? AND date_fin IS NULL";
-		return jdbcTemplate.update(sql, java.sql.Date.valueOf(dateFin), typeDemande);
+		return jdbcTemplate.update(sql, Timestamp.valueOf(dateFin), typeDemande);
 	}
 
 	private Demande_statut mapRow(java.sql.ResultSet rs, int rowNum) throws java.sql.SQLException {
@@ -93,16 +94,16 @@ public class Demande_statutRepository {
 		demande_statut.setId(rs.getInt("id"));
 		demande_statut.setTypeDemande(rs.getInt("type_demande"));
 		demande_statut.setTypeStatut(rs.getInt("type_statut"));
-		demande_statut.setDateDebut(rs.getDate("date_debut"));
-		demande_statut.setDateFin(rs.getDate("date_fin"));
+		demande_statut.setTimestampDebut(rs.getDate("date_debut"));
+		demande_statut.setTimestampFin(rs.getDate("date_fin"));
 		return demande_statut;
 	}
 
-	private Date toSqlDate(java.util.Date date) {
+	private Timestamp toSqlTimestamp(java.util.Date date) {
 		if (date == null) {
 			return null;
 		}
-		return new Date(date.getTime());
+		return new Timestamp(date.getTime());
 	}
 
 }

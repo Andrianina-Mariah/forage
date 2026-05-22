@@ -21,7 +21,7 @@
 		</div>
 		<div class="actions">
 			<a class="btn ghost" href="/demande/new">Nouvelle demande</a>
-			<a class="btn primary" href="/statuts">Gérer les statuts</a>
+			<a class="btn primary" href="/statut">Gérer les statuts</a>
 		</div>
 	</header>
 
@@ -48,7 +48,7 @@
 				<div class="table-row">
 					<span>${demande.reference}</span>
 					<span>${demande.libelleDemande}</span>
-					<span>${demande.idCommune}</span>
+					<span>${demande.nomCommune}</span>
 					<span class="tag">${demande.lieu}</span>
 					<span>${demande.dateDemande}</span>
 				</div>

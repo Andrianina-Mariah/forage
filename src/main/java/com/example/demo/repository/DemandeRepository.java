@@ -58,9 +58,9 @@ public class DemandeRepository {
 
 	public List<Demande> findAll() {
 		String sql = """
-				SELECT id, libelle_demande, id_demandeur, reference, lieu_demande, id_commune, date_demande
-				FROM demande
-				ORDER BY date_demande DESC
+				SELECT demande.*, commune.nom as nom_commune
+				FROM demande JOIN commune ON commune.id=demande.id_commune
+				ORDER BY demande.date_demande DESC
 				""";
 		return jdbcTemplate.query(sql, this::mapRow);
 	}
@@ -90,6 +90,7 @@ public class DemandeRepository {
 
 	private Demande mapRow(java.sql.ResultSet rs, int rowNum) throws java.sql.SQLException {
 		return new Demande(
+			rs.getString("nom_commune"),
 			rs.getDate("date_demande"),
 			rs.getInt("id"),
 			rs.getInt("id_commune"),

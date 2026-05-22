@@ -2,15 +2,15 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <!DOCTYPE html>
-<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<html lang="fr">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title th:text="${appTitle}">Forage - Statuts</title>
+	<title>${appTitle}</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" th:href="@{/css/app.css}">
+	<link rel="stylesheet" href="/css/app.css">
 </head>
 <body class="page">
 	<header class="topbar">
@@ -19,26 +19,28 @@
 			<h1>Gestion des statuts</h1>
 			<p>Ajoutez ou modifiez les statuts existants.</p>
 		</div>
-		<a class="btn ghost" href="/demandes">Retour aux demandes</a>
+		<a class="btn ghost" href="/demande/list">Retour aux demandes</a>
 	</header>
 
 	<main class="container split">
 		<section class="card">
 			<h2>Statuts existants</h2>
 			<div class="list-cards">
-				<div class="mini-card" th:each="statut : ${statuts}">
+				<c:forEach var="statut" items="${statut}">
+				<div class="mini-card">
 					<div>
-						<h3 th:text="${statut.libelle}">Nouvelle</h3>
-						<p>ID: <span th:text="${statut.id}">1</span></p>
+						<h3>${statut.libelle}</h3>
+						<p>ID: <span>${statut.id}</span></p>
 					</div>
 					<button class="btn ghost">Modifier</button>
 				</div>
+				</c:forEach>
 			</div>
 		</section>
 
 		<section class="card glass">
 			<h2>Ajouter un statut</h2>
-			<form class="form" action="#" method="post">
+			<form class="form" action="/statut" method="post">
 				<label>
 					<span>Libellé</span>
 					<input type="text" name="libelle" placeholder="Ex: En attente" required>
@@ -49,11 +51,13 @@
 			<div class="divider"></div>
 
 			<h2>Modifier un statut</h2>
-			<form class="form" action="#" method="post">
+			<form class="form" action="/statut/update" method="post">
 				<label>
 					<span>Statut</span>
 					<select name="statusId">
-						<option th:each="statut : ${statuts}" th:value="${statut.id}" th:text="${statut.libelle}"></option>
+						<c:forEach var="statut" items="${statut}">
+						<option value="${statut.id}">${statut.id} • ${statut.libelle}</option>
+						</c:forEach>
 					</select>
 				</label>
 				<label>

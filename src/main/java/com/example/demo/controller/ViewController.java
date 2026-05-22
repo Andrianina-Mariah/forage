@@ -31,12 +31,12 @@ public class ViewController {
 		return "demandes";
 	}*/
 
-	@GetMapping("/statuts")
+	/*@GetMapping("/statuts")
 	public String statuts(Model model) {
 		model.addAttribute("appTitle", "Forage - Statuts");
 		model.addAttribute("statuts", statuses());
 		return "statuts";
-	}
+	}*/
 
 	@GetMapping("/devis/detail")
 	public String devisDetail(Model model) {

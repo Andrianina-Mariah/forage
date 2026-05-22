@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -25,7 +26,7 @@
 
 	<main class="container">
 		<section class="card">
-			<form class="filter" action="#" method="get">
+			<form class="filter" action="/devis/list" method="get">
 				<label>
 					<span>Type de devis</span>
 					<select name="type">
@@ -43,33 +44,21 @@
 
 			<div class="table">
 				<div class="table-row table-head cols-5">
-					<span>Référence</span>
-					<span>Demande</span>
+					<span>Id Demande</span>
 					<span>Type</span>
+					<span>Description</span>
 					<span>Date</span>
 					<span>Actions</span>
 				</div>
+				<c:forEach var="devis" items="${devis}">
 				<div class="table-row cols-5">
-					<span>DV-2026-001</span>
-					<span>RF-2026-001 • Forage école primaire</span>
-					<span class="tag">Étude</span>
-					<span>12/05/2026</span>
+					<span>${devis.idDemande}</span>
+					<span class="tag">${devis.type}</span>
+					<span>${devis.description}</span>
+					<span>${devis.date}</span>
 					<a class="link" href="/devis/detail">Détails</a>
 				</div>
-				<div class="table-row cols-5">
-					<span>DV-2026-002</span>
-					<span>RF-2026-002 • Forage centre de santé</span>
-					<span class="tag">Réalisation</span>
-					<span>10/05/2026</span>
-					<a class="link" href="/devis/detail">Détails</a>
-				</div>
-				<div class="table-row cols-5">
-					<span>DV-2026-003</span>
-					<span>RF-2026-003 • Forage village Andranomena</span>
-					<span class="tag">Étude</span>
-					<span>08/05/2026</span>
-					<a class="link" href="/devis/detail">Détails</a>
-				</div>
+			</c:forEach>
 			</div>
 		</section>
 	</main>

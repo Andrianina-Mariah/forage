@@ -85,7 +85,7 @@ public class DevisRepository {
 	}
 
 	private Devis mapRow(java.sql.ResultSet rs, int rowNum) throws java.sql.SQLException {
-		LocalDate date = rs.getDate("date_devis").toLocalDate();
+		LocalDate date = rs.getDate("date").toLocalDate();
 		return new Devis(
 			date,
 			rs.getString("description"),

@@ -9,6 +9,7 @@ com/example/demo/model/Commune.class
 com/example/demo/model/Statut.class
 com/example/demo/model/Devis_detail.class
 com/example/demo/DemoApplication.class
+com/example/demo/controller/StatutController.class
 com/example/demo/repository/StatutRepository.class
 com/example/demo/repository/CommuneRepository.class
 com/example/demo/repository/Demande_statutRepository.class

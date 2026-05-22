@@ -73,7 +73,7 @@
 				<li><strong>date_demande</strong> (date)</li>
 			</ul>
 			<div class="note">
-				<p>Connexion à la session utilisateur prévue via Spring MVC + SessionAttributes.</p>
+				<a class="link" href="/devis/new">Entrer nouveau devis</a>				
 				<a class="link" href="/demande/list">Voir toutes les demandes</a>
 			</div>
 		</aside>

@@ -10,8 +10,19 @@ public class Demande {
     private int idCommune;
     private String libelleDemande;
     private java.util.Date dateDemande;
+    private String nomCommune;
 
-    public Demande(Date dateDemande, int id, int idCommune, int idDemandeur, String libelleDemande, String lieu, String reference) {
+    public Demande(String nomCommune, java.util.Date dateDemande, int id, int idCommune, int idDemandeur, String libelleDemande, String lieu, String reference) {
+        this.nomCommune = nomCommune;
+        this.dateDemande = dateDemande;
+        this.id = id;
+        this.idCommune = idCommune;
+        this.idDemandeur = idDemandeur;
+        this.libelleDemande = libelleDemande;
+        this.lieu = lieu;
+        this.reference = reference;
+    }
+    public Demande(java.util.Date dateDemande, int id, int idCommune, int idDemandeur, String libelleDemande, String lieu, String reference) {
         this.dateDemande = dateDemande;
         this.id = id;
         this.idCommune = idCommune;
@@ -77,4 +88,12 @@ public class Demande {
         this.dateDemande = dateDemande;
     }
 
+    public void setNomCommune(String nomCommune) {
+        this.nomCommune = nomCommune;
+    }
+
+    public String getNomCommune() {
+        return nomCommune;
+    }
 }
+

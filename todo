@@ -32,7 +32,7 @@ Faire marcher login (ok)
 faire marcher formulaire demande (ok)
 Affichage liste demande (ok)
 Associer demande + status (ok)
-Gestion status
+Gestion status (ok à part màj)
 Reference automatique
 
 mvn clean package
@@ -51,6 +51,21 @@ Back:
 - Model de chaque table (ok)
 - CRUD pour tout les tables dans repository(ok)
 - faire marcher formulaire de devis (ok)
-- Affichage de la liste des devis (en fonction du type)
+- Affichage de la liste des devis (en fonction du type) (ok)
 - Affichage de la liste des détails de chaque devis
 - Associer devis + demande
+
+fonctionnalité encore à ameliorer:
+- update automatique pour différent devis
+- liste demande afficher nom commune + status actuelle
+- afficher table demande_statut
+
+Partie 3
+Front:
+- formulaire pour ajouter nouveau ligne dans demande_statut
+- formulaire pour modifier une ligne dans demande_statut
+
+Back:
+- ajouter heure:minute à la date
+
+SELECT demande.id, demande.libelle_demande, demande.id_demandeur, demande.reference, demande.lieu_demande, demande.id_commune, demande.date_demande, commune.nom FROM demande JOIN commune ON commune.id=demande.id_commune ORDER BY demande.date_demande DESC;

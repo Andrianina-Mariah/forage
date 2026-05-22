@@ -70,6 +70,7 @@ public class DevisController {
     @GetMapping("/devis/list")
     public String devisList(Model model) {
         model.addAttribute("appTitle", "Forage - Mes devis");
+        model.addAttribute("devis", devisRepository.findAll());
         return "devis-list";
     }
 }

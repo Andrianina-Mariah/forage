@@ -9,6 +9,8 @@ public class Demande_statut {
     private String observation;
     private java.util.Date dateDebut;
     private java.util.Date dateFin;
+    private String libelleStatut;
+    private String libelleDemande;
 
     public Demande_statut(String observation, Date dateDebut, Date dateFin, int id, int typeDemande, int typeStatut) {
         this.observation = observation;
@@ -18,6 +20,17 @@ public class Demande_statut {
         this.typeDemande = typeDemande;
         this.typeStatut = typeStatut;
     }
+        public Demande_statut(String observation, Date dateDebut, Date dateFin, int id, int typeDemande, int typeStatut, String libelleStatut, String libelleDemande) {
+        this.observation = observation;
+        this.dateDebut = dateDebut;
+        this.dateFin = dateFin;
+        this.id = id;
+        this.typeDemande = typeDemande;
+        this.typeStatut = typeStatut;
+        this.libelleStatut = libelleStatut;
+        this.libelleDemande = libelleDemande;
+    }
+
     public Demande_statut() {
     }
 
@@ -67,5 +80,21 @@ public class Demande_statut {
 
     public void setTimestampFin(Date dateFin) {
         this.dateFin = dateFin;
+    }
+
+    public String getLibelleStatut() {
+        return libelleStatut;
+    }
+
+    public void setLibelleStatut(String libelleStatut) {
+        this.libelleStatut = libelleStatut;
+    }
+
+    public String getLibelleDemande() {
+        return libelleDemande;
+    }
+
+    public void setLibelleDemande(String libelleDemande) {
+        this.libelleDemande = libelleDemande;
     }
 }

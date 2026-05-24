@@ -37,17 +37,18 @@ public class Demande_StatutController {
     }
 
     @PostMapping("/demande-statut")
-    public String doDemandeStatut(@RequestParam("id_demande") int idDemande,
-        @RequestParam("id_statut") int idStatut,
+    public String doDemandeStatut(@RequestParam("type_demande") int idDemande,
+        @RequestParam("type_statut") int idStatut,
         @RequestParam(name = "observation", required = false, defaultValue = "") String observation,
         @RequestParam(name = "date_debut", required = false)
         @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") LocalDateTime dateDebut,
         Model model) {
         LocalDateTime resolvedDateDebut = (dateDebut != null) ? dateDebut : LocalDateTime.now();
+        demande_statutRepository.closeOpenStatut(idDemande, resolvedDateDebut);
         Date sqlDateDebut = Date.from(resolvedDateDebut.atZone(ZoneId.systemDefault()).toInstant());
         Demande_statut demandeStatut = new Demande_statut(observation, sqlDateDebut, null, 0, idDemande, idStatut);
         demande_statutRepository.save(demandeStatut);
-        return "redirect:/demande-statut-new";
+        return "redirect:/demande-statut/new";
     }
 
     @GetMapping("/demande-statut/list")

@@ -73,7 +73,8 @@
 				<li><strong>date_demande</strong> (datetime)</li>
 			</ul>
 			<div class="note">
-				<a class="link" href="/devis/new">Entrer nouveau devis</a>				
+				<p><a class="link" href="/demande-statut/list">Voir toutes les historiques</a></p>
+				<p><a class="link" href="/devis/new">Entrer nouveau devis</a></p>			
 				<a class="link" href="/demande/list">Voir toutes les demandes</a>
 			</div>
 		</aside>

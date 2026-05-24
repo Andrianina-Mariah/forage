@@ -57,8 +57,10 @@ public class Demande_statutRepository {
 
 	public List<Demande_statut> findAll() {
 		String sql = """
-				SELECT id, type_demande, type_statut, observation, date_debut, date_fin
+				SELECT demande_statut.*, statut.libelle as libelle_statut, demande.libelle_demande as libelle_demande
 				FROM demande_statut
+				LEFT JOIN statut ON demande_statut.type_statut = statut.id
+				LEFT JOIN demande ON demande_statut.type_demande = demande.id
 				ORDER BY date_debut DESC
 				""";
 		return jdbcTemplate.query(sql, this::mapRow);
@@ -99,6 +101,8 @@ public class Demande_statutRepository {
 		demande_statut.setObservation(rs.getString("observation"));
 		demande_statut.setTimestampDebut(rs.getDate("date_debut"));
 		demande_statut.setTimestampFin(rs.getDate("date_fin"));
+		demande_statut.setLibelleStatut(rs.getString("libelle_statut"));
+		demande_statut.setLibelleDemande(rs.getString("libelle_demande"));
 		return demande_statut;
 	}
 

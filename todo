@@ -63,10 +63,10 @@ fonctionnalité encore à ameliorer:
 
 Partie 3
 Front:
-- formulaire pour ajouter nouveau ligne dans demande_statut
-- formulaire pour modifier une ligne dans demande_statut
+- formulaire pour ajouter nouveau ligne dans demande_statut (ok)
+- formulaire pour modifier une ligne dans demande_statut (ok)
 
 Back:
 - ajouter heure:minute à la date (ok)
-- modifier la table demande_statut pour ajouter la colonne observation
-- ajouter table parametre (id_statut1, id_statut2, durée, alerte)
+- modifier la table demande_statut pour ajouter la colonne observation (ok)
+- ajouter table parametre (id_statut1, id_statut2, durée, alerte) (ok)

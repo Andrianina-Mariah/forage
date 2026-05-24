@@ -20,6 +20,7 @@ com/example/demo/repository/DistrictRepository.class
 com/example/demo/model/Demande_statut.class
 com/example/demo/controller/DemandeController.class
 com/example/demo/repository/DevisRepository.class
+com/example/demo/controller/Demande_StatutController.class
 com/example/demo/controller/ViewController.class
 com/example/demo/controller/CurrentUserAdvice.class
 com/example/demo/model/Devis.class

@@ -24,16 +24,17 @@ public class Demande_statutRepository {
 
 	public Demande_statut save(Demande_statut demande_statut) {
 		String sql = """
-				INSERT INTO demande_statut (type_demande, type_statut, date_debut, date_fin)
-				VALUES (?, ?, ?, ?)
+				INSERT INTO demande_statut (type_demande, type_statut, observation, date_debut, date_fin)
+				VALUES (?, ?, ?, ?, ?)
 				""";
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		jdbcTemplate.update(connection -> {
 			PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			statement.setInt(1, demande_statut.getTypeDemande());
 			statement.setInt(2, demande_statut.getTypeStatut());
-			statement.setTimestamp(3, toSqlTimestamp(demande_statut.getDateDebut()));
-			statement.setTimestamp(4, toSqlTimestamp(demande_statut.getDateFin()));
+			statement.setString(3, demande_statut.getObservation());
+			statement.setTimestamp(4, toSqlTimestamp(demande_statut.getDateDebut()));
+			statement.setTimestamp(5, toSqlTimestamp(demande_statut.getDateFin()));
 			return statement;
 		}, keyHolder);
 
@@ -46,7 +47,7 @@ public class Demande_statutRepository {
 
 	public Optional<Demande_statut> findById(int id) {
 		String sql = """
-				SELECT id, type_demande, type_statut, date_debut, date_fin
+				SELECT id, type_demande, type_statut, observation, date_debut, date_fin
 				FROM demande_statut
 				WHERE id = ?
 				""";
@@ -56,7 +57,7 @@ public class Demande_statutRepository {
 
 	public List<Demande_statut> findAll() {
 		String sql = """
-				SELECT id, type_demande, type_statut, date_debut, date_fin
+				SELECT id, type_demande, type_statut, observation, date_debut, date_fin
 				FROM demande_statut
 				ORDER BY date_debut DESC
 				""";
@@ -66,12 +67,13 @@ public class Demande_statutRepository {
 	public boolean update(Demande_statut demande_statut) {
 		String sql = """
 				UPDATE demande_statut
-				SET type_demande = ?, type_statut = ?, date_debut = ?, date_fin = ?
+				SET type_demande = ?, type_statut = ?, observation = ?, date_debut = ?, date_fin = ?
 				WHERE id = ?
 				""";
 		int updated = jdbcTemplate.update(sql,
 			demande_statut.getTypeDemande(),
 			demande_statut.getTypeStatut(),
+			demande_statut.getObservation(),
 			toSqlTimestamp(demande_statut.getDateDebut()),
 			toSqlTimestamp(demande_statut.getDateFin()),
 			demande_statut.getId()
@@ -94,6 +96,7 @@ public class Demande_statutRepository {
 		demande_statut.setId(rs.getInt("id"));
 		demande_statut.setTypeDemande(rs.getInt("type_demande"));
 		demande_statut.setTypeStatut(rs.getInt("type_statut"));
+		demande_statut.setObservation(rs.getString("observation"));
 		demande_statut.setTimestampDebut(rs.getDate("date_debut"));
 		demande_statut.setTimestampFin(rs.getDate("date_fin"));
 		return demande_statut;

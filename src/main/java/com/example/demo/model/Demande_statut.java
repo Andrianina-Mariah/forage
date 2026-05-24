@@ -6,10 +6,12 @@ public class Demande_statut {
     private int id;
     private int typeDemande;
     private int typeStatut;
+    private String observation;
     private java.util.Date dateDebut;
     private java.util.Date dateFin;
 
-    public Demande_statut(Date dateDebut, Date dateFin, int id, int typeDemande, int typeStatut) {
+    public Demande_statut(String observation, Date dateDebut, Date dateFin, int id, int typeDemande, int typeStatut) {
+        this.observation = observation;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
         this.id = id;
@@ -25,6 +27,14 @@ public class Demande_statut {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getObservation() {
+        return observation;
+    }
+    
+    public void setObservation(String observation) {
+        this.observation = observation;
     }
 
     public int getTypeDemande() {

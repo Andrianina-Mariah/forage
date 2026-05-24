@@ -52,7 +52,7 @@ public class DemandeController {
 		java.sql.Timestamp sqlTimestamp = java.sql.Timestamp.valueOf(effectiveDate);
 		Demande demande = new Demande(sqlTimestamp, 0, idCommune, idDemandeur, libelleDemande, lieu, reference);
 		demandeRepository.save(demande);
-		Demande_statut demandeStatut = new Demande_statut(sqlTimestamp, null, 0, demande.getId(), DEFAULT_STATUT_ID);
+		Demande_statut demandeStatut = new Demande_statut(null, sqlTimestamp, null, 0, demande.getId(), DEFAULT_STATUT_ID);
 		demande_statutRepository.save(demandeStatut);
 		return "redirect:/demande/new";
 	}

@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,8 +10,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.demo.model.*;
-import com.example.demo.repository.*;
+import com.example.demo.model.Demande_statut;
+import com.example.demo.model.Devis;
+import com.example.demo.model.Devis_detail;
+import com.example.demo.repository.DemandeRepository;
+import com.example.demo.repository.Demande_statutRepository;
+import com.example.demo.repository.DevisRepository;
+import com.example.demo.repository.Devis_detailRepository;
 
 @Controller
 public class DevisController {
@@ -63,7 +68,7 @@ public class DevisController {
         }
         demande_statutRepository.closeOpenStatut(idDemande, resolvedDate);
         int statutId = "realisation".equalsIgnoreCase(type) ? 4 : 2;
-        Demande_statut statut = new Demande_statut(java.sql.Timestamp.valueOf(resolvedDate), null, 0, idDemande, statutId);
+        Demande_statut statut = new Demande_statut(null, java.sql.Timestamp.valueOf(resolvedDate), null, 0, idDemande, statutId);
         demande_statutRepository.save(statut);
         return "redirect:/devis/new";
     }

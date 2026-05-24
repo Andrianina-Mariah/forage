@@ -1,9 +1,10 @@
 package com.example.demo.controller;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.stream.Collectors;
+import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,6 +43,41 @@ public class ViewController {
 	public String devisDetail(Model model) {
 		model.addAttribute("appTitle", "Forage - Détail devis");
 		return "devis-detail";
+	}
+
+	/*@GetMapping("/demande-statut/new")
+	public String demandeStatutNew(Model model) {
+		model.addAttribute("appTitle", "Forage - Nouveau statut");
+		model.addAttribute("demandes", List.of(
+				Map.of("id", 1, "reference", "RF-2026-001", "libelleDemande", "Forage école primaire"),
+				Map.of("id", 2, "reference", "RF-2026-002", "libelleDemande", "Forage CSB"))
+		);
+		model.addAttribute("statuts", List.of(
+				Map.of("id", 1, "libelle", "Nouvelle"),
+				Map.of("id", 2, "libelle", "Demande de devis d'étude créée"))
+		);
+		return "demande-statut-new";
+	}*/
+
+	@GetMapping("/demande-statut/edit")
+	public String demandeStatutEdit(Model model) {
+		model.addAttribute("appTitle", "Forage - Modifier statut");
+		model.addAttribute("demandes", List.of(
+				Map.of("id", 1, "reference", "RF-2026-001", "libelleDemande", "Forage école primaire"),
+				Map.of("id", 2, "reference", "RF-2026-002", "libelleDemande", "Forage CSB"))
+		);
+		model.addAttribute("statuts", List.of(
+				Map.of("id", 1, "libelle", "Nouvelle"),
+				Map.of("id", 2, "libelle", "Demande de devis d'étude créée"))
+		);
+		model.addAttribute("demandeStatut", Map.of(
+				"id", 10,
+				"typeDemande", 1,
+				"typeStatut", 2,
+				"dateDebut", "2026-05-22T10:30",
+				"dateFin", ""
+		));
+		return "demande-statut-edit";
 	}
 
 	private List<StatusView> statuses() {

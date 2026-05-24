@@ -32,6 +32,7 @@ CREATE TABLE demande_statut (
     type_statut INT,
     date_debut DATETIME NOT NULL,
     date_fin DATETIME,
+    observation TEXT,
     FOREIGN KEY (type_demande) REFERENCES demande(id),
     FOREIGN KEY (type_statut) REFERENCES statut(id)
 );
@@ -71,6 +72,16 @@ CREATE TABLE devis_detail (
     FOREIGN KEY (idDevis) REFERENCES devis(id)
 );
 
+CREATE TABLE parametre (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    id_statut1 INT,
+    id_statut2 INT,
+    duree_minute INT,
+    alerte VARCHAR(50),
+    FOREIGN KEY (id_statut1) REFERENCES statut(id),
+    FOREIGN KEY (id_statut2) REFERENCES statut(id)
+);
+
 ALTER TABLE demande
 MODIFY COLUMN date_demande DATETIME NOT NULL;
 
@@ -80,3 +91,6 @@ MODIFY COLUMN date_fin DATETIME;
 
 ALTER TABLE devis
 MODIFY COLUMN date DATETIME NOT NULL;
+
+ALTER TABLE demande_statut
+ADD COLUMN observation TEXT;

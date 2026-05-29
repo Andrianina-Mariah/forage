@@ -52,13 +52,13 @@ Back:
 - CRUD pour tout les tables dans repository(ok)
 - faire marcher formulaire de devis (ok)
 - Affichage de la liste des devis (en fonction du type) (ok)
-- Affichage de la liste des détails de chaque devis
-- Associer devis + demande
+- Affichage de la liste des détails de chaque devis (ok)
+- Associer devis + demande (ok)
 
 fonctionnalité encore à ameliorer:
-- update automatique pour différent devis
-- liste demande afficher nom commune + status actuelle
-- afficher table demande_statut
+- update automatique pour différent devis (genre si je fais demande devis forage le statut doit -être le même) (ok)
+- liste demande afficher nom commune(ok) + status actuelle (ok)
+- afficher table demande_statut(ok)
 - Session utilisateur garder sur tout les pages le même user
 
 Partie 3
@@ -70,3 +70,8 @@ Back:
 - ajouter heure:minute à la date (ok)
 - modifier la table demande_statut pour ajouter la colonne observation (ok)
 - ajouter table parametre (id_statut1, id_statut2, durée, alerte) (ok)
+- pouvoir modifier demande_statut
+
+27959871205362
+0340190013
+

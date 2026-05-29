@@ -54,8 +54,8 @@
 					<input type="datetime-local" name="date_debut" value="${demandeStatut.dateDebut}" required>
 				</label>
 				<label>
-					<span>Date fin (optionnel)</span>
-					<input type="datetime-local" name="date_fin" value="${demandeStatut.dateFin}">
+					<span>Observation</span>
+					<input type="text" name="observation" value="${demandeStatut.observation}">
 				</label>
 				<div class="form-actions">
 					<button type="submit" class="btn primary">Enregistrer</button>
@@ -70,7 +70,7 @@
 				<li><strong>type_demande</strong> (int)</li>
 				<li><strong>type_statut</strong> (int)</li>
 				<li><strong>date_debut</strong> (datetime)</li>
-				<li><strong>date_fin</strong> (datetime)</li>
+				<li><strong>observation</strong> (text)</li>
 			</ul>
 			<div class="note">
 				<a class="link" href="/demande/list">Voir toutes les demandes</a>

@@ -1,8 +1,8 @@
 package com.example.demo.repository;
 
-import java.sql.Timestamp;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,9 +58,13 @@ public class DemandeRepository {
 
 	public List<Demande> findAll() {
 		String sql = """
-				SELECT demande.*, commune.nom as nom_commune
-				FROM demande JOIN commune ON commune.id=demande.id_commune
-				ORDER BY demande.date_demande DESC
+				SELECT demande.*, commune.nom AS nom_commune, demande_statut.type_statut AS idstatut, statut.libelle AS statut
+				FROM demande 
+				JOIN commune ON commune.id = demande.id_commune
+				JOIN demande_statut ON demande_statut.type_demande = demande.id
+				JOIN statut ON statut.id = demande_statut.type_statut
+				WHERE demande_statut.date_fin IS NULL
+				ORDER BY demande.date_demande DESC;
 				""";
 		return jdbcTemplate.query(sql, this::mapRow);
 	}
@@ -97,7 +101,8 @@ public class DemandeRepository {
 			rs.getInt("id_demandeur"),
 			rs.getString("libelle_demande"),
 			rs.getString("lieu_demande"),
-			rs.getString("reference")
+			rs.getString("reference"),
+			rs.getString("statut")
 		);
 	}
 

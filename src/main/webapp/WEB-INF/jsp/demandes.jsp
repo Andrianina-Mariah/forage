@@ -43,6 +43,7 @@
 				<span>Commune</span>
 				<span>Lieu</span>
 				<span>Date</span>
+				<span>Statut</span>
 			</div>
 			<c:forEach var="demande" items="${demandes}">
 				<div class="table-row">
@@ -51,6 +52,7 @@
 					<span>${demande.nomCommune}</span>
 					<span class="tag">${demande.lieu}</span>
 					<span><fmt:formatDate value="${demande.dateDemande}" pattern="dd/MM/yyyy HH:mm" /></span>
+					<span class="tag">${demande.statut}</span>
 				</div>
 			</c:forEach>
 		</div>

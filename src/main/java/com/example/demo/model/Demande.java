@@ -11,8 +11,9 @@ public class Demande {
     private String libelleDemande;
     private java.util.Date dateDemande;
     private String nomCommune;
+    private String statut;
 
-    public Demande(String nomCommune, java.util.Date dateDemande, int id, int idCommune, int idDemandeur, String libelleDemande, String lieu, String reference) {
+    public Demande(String nomCommune, java.util.Date dateDemande, int id, int idCommune, int idDemandeur, String libelleDemande, String lieu, String reference, String statut) {
         this.nomCommune = nomCommune;
         this.dateDemande = dateDemande;
         this.id = id;
@@ -21,7 +22,9 @@ public class Demande {
         this.libelleDemande = libelleDemande;
         this.lieu = lieu;
         this.reference = reference;
+        this.statut = statut;
     }
+
     public Demande(java.util.Date dateDemande, int id, int idCommune, int idDemandeur, String libelleDemande, String lieu, String reference) {
         this.dateDemande = dateDemande;
         this.id = id;
@@ -94,6 +97,14 @@ public class Demande {
 
     public String getNomCommune() {
         return nomCommune;
+    }
+
+    public String getStatut() {
+        return statut;
+    }
+
+    public void setStatut(String statut) {
+        this.statut = statut;
     }
 }
 

@@ -1,15 +1,12 @@
 package com.example.demo.controller;
 
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.stream.Collectors;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ViewController {
@@ -39,11 +36,11 @@ public class ViewController {
 		return "statuts";
 	}*/
 
-	@GetMapping("/devis/detail")
-	public String devisDetail(Model model) {
-		model.addAttribute("appTitle", "Forage - Détail devis");
-		return "devis-detail";
-	}
+	// @GetMapping("/devis/detail")
+	// public String devisDetail(Model model) {
+	// 	model.addAttribute("appTitle", "Forage - Détail devis");
+	// 	return "devis-detail";
+	// }
 
 	/*@GetMapping("/demande-statut/new")
 	public String demandeStatutNew(Model model) {

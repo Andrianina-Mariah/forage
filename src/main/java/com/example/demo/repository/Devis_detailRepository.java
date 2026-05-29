@@ -1,10 +1,9 @@
 package com.example.demo.repository;
 
 import java.sql.PreparedStatement;
-import java.util.List;
-import java.sql.Date;
-import java.util.Optional;
 import java.sql.Statement;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -53,6 +52,17 @@ public class Devis_detailRepository {
 		return result.stream().findFirst();
 	}
 
+	public List<Devis_detail> findByDevisId(int idDevis) {
+		String sql = """
+			SELECT id, idDevis, libelle, quantite, prix_unitaire
+			FROM devis_detail
+			WHERE idDevis = ?
+			ORDER BY id
+			""";
+
+		return jdbcTemplate.query(sql, this::mapRow, idDevis);
+	}
+
 	public List<Devis_detail> findAll() {
 		String sql = """
 				SELECT id, idDevis, libelle, quantite, prix_unitaire
@@ -88,8 +98,8 @@ public class Devis_detailRepository {
 			rs.getInt("id"),
 			rs.getInt("idDevis"),
 			rs.getString("libelle"),
-			rs.getDouble("quantite"),
-			rs.getDouble("prix_unitaire")
+			rs.getDouble("prix_unitaire"),
+			rs.getDouble("quantite")
 		);
 	}
 

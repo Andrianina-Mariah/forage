@@ -57,7 +57,7 @@
 					<span class="tag">${devis.type}</span>
 					<span>${devis.description}</span>
 					<span>${devis.date}</span>
-					<a class="link" href="/devis/detail">Détails</a>
+					<a class="link" href="/devis/detail?id=${devis.id}">Détails</a>
 				</div>
 			</c:forEach>
 			</div>

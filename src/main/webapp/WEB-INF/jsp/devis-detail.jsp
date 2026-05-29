@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -25,19 +26,19 @@
 
 	<main class="container split">
 		<section class="card">
-			<h2>Devis DV-2026-001</h2>
+			<h2>Devis n° ${devis.id}</h2>
 			<div class="list-cards">
 				<div class="mini-card">
 					<div>
 						<strong>Demande</strong>
-						<p class="muted">RF-2026-001 • Forage école primaire</p>
+						<p class="muted">Demande n° ${devis.idDemande}</p>
 					</div>
-					<span class="tag">Étude</span>
+					<span class="tag">${devis.type}</span>
 				</div>
 				<div class="mini-card">
 					<div>
 						<strong>Date</strong>
-						<p class="muted">12/05/2026</p>
+						<p class="muted">${devis.date}</p>
 					</div>
 					<span class="badge">En cours</span>
 				</div>
@@ -53,32 +54,21 @@
 					<span>Total</span>
 					<span>Action</span>
 				</div>
-				<div class="table-row cols-5">
-					<span>Étude hydrogéologique</span>
-					<span>1 forfait</span>
-					<span>350 000 Ar</span>
-					<span>350 000 Ar</span>
-					<button class="btn ghost" type="button">Voir</button>
-				</div>
-				<div class="table-row cols-5">
-					<span>Déplacement équipe</span>
-					<span>2 jours</span>
-					<span>120 000 Ar</span>
-					<span>240 000 Ar</span>
-					<button class="btn ghost" type="button">Voir</button>
-				</div>
-				<div class="table-row cols-5">
-					<span>Analyse qualité eau</span>
-					<span>1 unité</span>
-					<span>80 000 Ar</span>
-					<span>80 000 Ar</span>
-					<button class="btn ghost" type="button">Voir</button>
+				<c:forEach items="${details}" var="detail">
+					<div class="table-row cols-5">
+						<span>${detail.libelle}</span>
+						<span>${detail.quantite}</span>
+						<span>${detail.prix} Ar</span>
+						<span>${detail.quantite * detail.prix} Ar</span>
+						<button class="btn ghost" type="button">Voir</button>
+					</div>
+				</c:forEach>
 				</div>
 			</div>
 
 			<div class="total-card">
 				<span>Total estimé</span>
-				<strong>670 000 Ar</strong>
+				<strong>${total} Ar</strong>
 			</div>
 		</section>
 

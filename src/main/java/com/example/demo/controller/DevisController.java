@@ -79,4 +79,22 @@ public class DevisController {
         model.addAttribute("devis", devisRepository.findAll());
         return "devis-list";
     }
+
+    @GetMapping("/devis/detail")
+    public String devisDetail(@RequestParam("id") int id, Model model) {
+        Devis devis = devisRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Devis introuvable"));
+
+        List<Devis_detail> details = devis_detailRepository.findByDevisId(id);
+
+        double total = details.stream()
+            .mapToDouble(detail -> detail.getQuantite() * detail.getPrix())
+            .sum();
+        model.addAttribute("appTitle", "Forage - Détail devis");
+        model.addAttribute("devis", devis);
+        model.addAttribute("details", details);
+        model.addAttribute("total", total);
+
+        return "devis-detail";
+    }
 }

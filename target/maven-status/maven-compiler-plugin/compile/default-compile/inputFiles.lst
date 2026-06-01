@@ -1,6 +1,7 @@
 /home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/DemoApplication.java
 /home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/controller/AuthController.java
 /home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/controller/CurrentUserAdvice.java
+/home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/controller/DemandeAlerteApiController.java
 /home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/controller/DemandeController.java
 /home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/controller/Demande_StatutController.java
 /home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/controller/DevisController.java
@@ -24,3 +25,4 @@
 /home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/repository/DistrictRepository.java
 /home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/repository/RegionRepository.java
 /home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/repository/StatutRepository.java
+/home/maria/s4/Web Dynamique/forage/src/main/java/com/example/demo/service/DemandeAlerteService.java

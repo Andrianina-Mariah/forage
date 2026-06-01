@@ -75,3 +75,25 @@ Back:
 27959871205362
 0340190013
 
+j'ai ajouté ses php dans le projet le but c'est que dans une php j'entre le numéro de la demande et il me rend la liste d'alerte de ce demande précis.
+alors où on établie les alertes c'est dans la table parametre CREATE TABLE parametre (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    id_statut1 INT,
+    id_statut2 INT,
+    duree_minute INT,
+    alerte VARCHAR(50),
+    FOREIGN KEY (id_statut1) REFERENCES statut(id),
+    FOREIGN KEY (id_statut2) REFERENCES statut(id)
+);
+alors il y a jeu de donnée comme ça par exemple
+id_statut1  id_statut2  duree_minute    alerte
+1           2           360             Rouge
+1           2           200             Jaune
+4           6           1000            Jaune
+1           10          10000           Rouge
+vues que 1 demande peux passer par plusieur status du coup il faut l'heure d'intervalle entre chaque statut à exprimer en minute ici et dans quel alerte il se situe donc
+mais il y a encore une contrainte le durée de travail commence de 8h à 16h donc on ne compte que ça du coup si il a durée 2 jours sur cette même status on ne calcul le temps que de 8 à 16h
+du coup le php récupère le numero de la demande et l'envoie vers l'api qui lui va l'exposé au spring et se dernier va rendre les liste d'alerte et le durée travaillé exprimer en minute qui va être enregistrer sur la colonne duree_travaillé de demande_statut sur le id_status1
+peux-tu me faire ça ?
+
+php -S localhost:8000

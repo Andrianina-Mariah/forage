@@ -33,6 +33,7 @@ CREATE TABLE demande_statut (
     date_debut DATETIME NOT NULL,
     date_fin DATETIME,
     observation TEXT,
+    duree_travail_minute FLOAT,
     FOREIGN KEY (type_demande) REFERENCES demande(id),
     FOREIGN KEY (type_statut) REFERENCES statut(id)
 );
@@ -82,6 +83,24 @@ CREATE TABLE parametre (
     FOREIGN KEY (id_statut2) REFERENCES statut(id)
 );
 
+INSERT INTO parametre (id_statut1, id_statut2, duree_minute, alerte)
+VALUES
+-- Nouvelle -> Devis étude créée
+(1, 2, 120, 'Jaune'),
+(1, 2, 360, 'Rouge'),
+
+-- Nouvelle -> Devis forage créée
+(1, 4, 240, 'Jaune'),
+(1, 4, 480, 'Rouge'),
+
+-- Devis étude créée -> Devis étude refusée
+(2, 3, 180, 'Jaune'),
+(2, 3, 420, 'Rouge'),
+
+-- Devis forage créée -> Devis forage refusée
+(4, 5, 180, 'Jaune'),
+(4, 5, 420, 'Rouge');
+
 ALTER TABLE demande
 MODIFY COLUMN date_demande DATETIME NOT NULL;
 
@@ -94,3 +113,6 @@ MODIFY COLUMN date DATETIME NOT NULL;
 
 ALTER TABLE demande_statut
 ADD COLUMN observation TEXT;
+
+ALTER TABLE demande_statut
+ADD COLUMN duree_travail_minute FLOAT;

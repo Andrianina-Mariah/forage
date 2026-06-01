@@ -3,8 +3,10 @@ com/example/demo/model/District.class
 com/example/demo/repository/RegionRepository.class
 com/example/demo/model/Client.class
 com/example/demo/controller/DevisController.class
+com/example/demo/service/DemandeAlerteService$DemandeAlerteResponse.class
 com/example/demo/model/Region.class
 com/example/demo/controller/ViewController$StatusView.class
+com/example/demo/controller/DemandeAlerteApiController.class
 com/example/demo/model/Commune.class
 com/example/demo/model/Statut.class
 com/example/demo/model/Devis_detail.class
@@ -18,11 +20,16 @@ com/example/demo/repository/ClientRepository.class
 com/example/demo/controller/ViewController$DemandeView.class
 com/example/demo/repository/DistrictRepository.class
 com/example/demo/model/Demande_statut.class
+com/example/demo/service/DemandeAlerteService$DemandeAlerte.class
 com/example/demo/controller/DemandeController.class
 com/example/demo/repository/DevisRepository.class
 com/example/demo/controller/Demande_StatutController.class
 com/example/demo/controller/ViewController.class
 com/example/demo/controller/CurrentUserAdvice.class
+com/example/demo/service/DemandeAlerteService$DemandeIntrouvableException.class
 com/example/demo/model/Devis.class
+com/example/demo/service/DemandeAlerteService.class
 com/example/demo/repository/Devis_detailRepository.class
+com/example/demo/service/DemandeAlerteService$ParametreAlerte.class
 com/example/demo/controller/AuthController.class
+com/example/demo/service/DemandeAlerteService$DemandeStatutPeriode.class

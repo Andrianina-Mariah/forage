@@ -29,11 +29,12 @@
 			<h2>Modifier une ligne demande_statut</h2>
 			<form class="form grid" action="/demande-statut/update" method="post">
 				<input type="hidden" name="id" value="${demandeStatut.id}">
+				<input type="hidden" name="previous_date_debut" value="${dateDebutValue}">
 				<label>
 					<span>Demande</span>
-					<select name="type_demande" required>
+					<select name="type_demande" required onchange="window.location.href='/demande-statut/edit?type_demande=' + this.value">
 						<c:forEach var="demande" items="${demandes}">
-							<option value="${demande.id}" ${demande.id == demandeStatut.typeDemande ? 'selected' : ''}>
+							<option value="${demande.id}" ${demande.id == selectedDemandeId ? 'selected' : ''}>
 								${demande.reference} • ${demande.libelleDemande}
 							</option>
 						</c:forEach>
@@ -51,16 +52,19 @@
 				</label>
 				<label>
 					<span>Date début</span>
-					<input type="datetime-local" name="date_debut" value="${demandeStatut.dateDebut}" required>
+					<input type="datetime-local" name="date_debut" value="${dateDebutValue}" required>
 				</label>
 				<label>
 					<span>Observation</span>
 					<input type="text" name="observation" value="${demandeStatut.observation}">
 				</label>
 				<div class="form-actions">
-					<button type="submit" class="btn primary">Enregistrer</button>
+					<button type="submit" class="btn primary" ${hasOpenStatut ? '' : 'disabled'}>Enregistrer</button>
 					<a class="btn ghost" href="/demande/list">Annuler</a>
 				</div>
+				<c:if test="${!hasOpenStatut}">
+					<p class="muted">Aucun statut ouvert pour cette demande.</p>
+				</c:if>
 			</form>
 		</section>
 

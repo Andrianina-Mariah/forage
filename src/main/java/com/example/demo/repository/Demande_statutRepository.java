@@ -1,6 +1,8 @@
 package com.example.demo.repository;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -11,6 +13,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.model.Demande_statut;
 
@@ -47,11 +50,28 @@ public class Demande_statutRepository {
 
 	public Optional<Demande_statut> findById(int id) {
 		String sql = """
-				SELECT id, type_demande, type_statut, observation, date_debut, date_fin
+				SELECT demande_statut.*, statut.libelle as libelle_statut, demande.libelle_demande as libelle_demande
 				FROM demande_statut
-				WHERE id = ?
+				LEFT JOIN statut ON demande_statut.type_statut = statut.id
+				LEFT JOIN demande ON demande_statut.type_demande = demande.id
+				WHERE demande_statut.id = ?
 				""";
 		List<Demande_statut> result = jdbcTemplate.query(sql, this::mapRow, id);
+		return result.stream().findFirst();
+	}
+
+	public Optional<Demande_statut> findOpenByDemande(int typeDemande) {
+		String sql = """
+				SELECT demande_statut.*, statut.libelle as libelle_statut, demande.libelle_demande as libelle_demande
+				FROM demande_statut
+				LEFT JOIN statut ON demande_statut.type_statut = statut.id
+				LEFT JOIN demande ON demande_statut.type_demande = demande.id
+				WHERE demande_statut.type_demande = ?
+				  AND demande_statut.date_fin IS NULL
+				ORDER BY demande_statut.date_debut DESC, demande_statut.id DESC
+				LIMIT 1
+				""";
+		List<Demande_statut> result = jdbcTemplate.query(sql, this::mapRow, typeDemande);
 		return result.stream().findFirst();
 	}
 
@@ -83,6 +103,25 @@ public class Demande_statutRepository {
 		return updated > 0;
 	}
 
+	@Transactional
+	public boolean updateOpenStatut(Demande_statut demandeStatut, LocalDateTime previousDateDebut) {
+		Optional<Demande_statut> current = findById(demandeStatut.getId());
+		if (current.isEmpty()) {
+			return false;
+		}
+
+		Demande_statut oldStatut = current.get();
+		boolean updated = update(demandeStatut);
+		if (!updated) {
+			return false;
+		}
+
+		LocalDateTime newDateDebut = toLocalDateTime(demandeStatut.getDateDebut());
+		LocalDateTime oldDateDebut = previousDateDebut != null ? previousDateDebut : toLocalDateTime(oldStatut.getDateDebut());
+		updatePreviousDateFin(demandeStatut.getTypeDemande(), demandeStatut.getId(), oldDateDebut, newDateDebut);
+		return true;
+	}
+
 	public boolean deleteById(int id) {
 		String sql = "DELETE FROM demande_statut WHERE id = ?";
 		return jdbcTemplate.update(sql, id) > 0;
@@ -93,14 +132,63 @@ public class Demande_statutRepository {
 		return jdbcTemplate.update(sql, Timestamp.valueOf(dateFin), typeDemande);
 	}
 
-	private Demande_statut mapRow(java.sql.ResultSet rs, int rowNum) throws java.sql.SQLException {
+	private int updatePreviousDateFin(int typeDemande, int currentId, LocalDateTime oldDateDebut, LocalDateTime newDateDebut) {
+		if (newDateDebut == null) {
+			return 0;
+		}
+
+		if (oldDateDebut != null) {
+			String exactPreviousSql = """
+					UPDATE demande_statut
+					SET date_fin = ?
+					WHERE type_demande = ?
+					  AND id <> ?
+					  AND date_fin = ?
+					""";
+			int updated = jdbcTemplate.update(
+				exactPreviousSql,
+				Timestamp.valueOf(newDateDebut),
+				typeDemande,
+				currentId,
+				Timestamp.valueOf(oldDateDebut)
+			);
+			if (updated > 0) {
+				return updated;
+			}
+		}
+
+		String nearestPreviousSql = """
+				UPDATE demande_statut
+				SET date_fin = ?
+				WHERE id = (
+					SELECT id FROM (
+						SELECT id
+						FROM demande_statut
+						WHERE type_demande = ?
+						  AND id <> ?
+						  AND date_debut < ?
+						ORDER BY date_debut DESC, id DESC
+						LIMIT 1
+					) previous_statut
+				)
+				""";
+		return jdbcTemplate.update(
+			nearestPreviousSql,
+			Timestamp.valueOf(newDateDebut),
+			typeDemande,
+			currentId,
+			Timestamp.valueOf(newDateDebut)
+		);
+	}
+
+	private Demande_statut mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Demande_statut demande_statut = new Demande_statut();
 		demande_statut.setId(rs.getInt("id"));
 		demande_statut.setTypeDemande(rs.getInt("type_demande"));
 		demande_statut.setTypeStatut(rs.getInt("type_statut"));
 		demande_statut.setObservation(rs.getString("observation"));
-		demande_statut.setTimestampDebut(rs.getDate("date_debut"));
-		demande_statut.setTimestampFin(rs.getDate("date_fin"));
+		demande_statut.setTimestampDebut(rs.getTimestamp("date_debut"));
+		demande_statut.setTimestampFin(rs.getTimestamp("date_fin"));
 		demande_statut.setLibelleStatut(rs.getString("libelle_statut"));
 		demande_statut.setLibelleDemande(rs.getString("libelle_demande"));
 		return demande_statut;
@@ -111,6 +199,13 @@ public class Demande_statutRepository {
 			return null;
 		}
 		return new Timestamp(date.getTime());
+	}
+
+	private LocalDateTime toLocalDateTime(java.util.Date date) {
+		if (date == null) {
+			return null;
+		}
+		return new Timestamp(date.getTime()).toLocalDateTime();
 	}
 
 }

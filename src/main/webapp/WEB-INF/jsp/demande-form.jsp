@@ -74,7 +74,8 @@
 			</ul>
 			<div class="note">
 				<p><a class="link" href="/demande-statut/list">Voir toutes les historiques</a></p>
-				<p><a class="link" href="/devis/new">Entrer nouveau devis</a></p>			
+				<p><a class="link" href="/devis/new">Entrer nouveau devis</a></p>	
+				<p><a class="link" href="http://localhost:8000/Demande.php">voir état statut</a></p>	
 				<a class="link" href="/demande/list">Voir toutes les demandes</a>
 			</div>
 		</aside>

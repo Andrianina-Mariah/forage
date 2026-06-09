@@ -101,6 +101,11 @@ VALUES
 (4, 5, 180, 'Jaune'),
 (4, 5, 420, 'Rouge');
 
+INSERT INTO parametre (id_statut1, id_statut2, duree_minute, alerte)
+VALUES
+(2, 5, 180, 'Jaune'),
+(2, 5, 420, 'Rouge');
+
 ALTER TABLE demande
 MODIFY COLUMN date_demande DATETIME NOT NULL;
 
@@ -116,3 +121,18 @@ ADD COLUMN observation TEXT;
 
 ALTER TABLE demande_statut
 ADD COLUMN duree_travail_minute FLOAT;
+
+-- Désactiver temporairement les contraintes
+SET FOREIGN_KEY_CHECKS = 0;
+
+TRUNCATE TABLE devis_detail;
+TRUNCATE TABLE devis;
+TRUNCATE TABLE demande_statut;
+TRUNCATE TABLE demande;
+TRUNCATE TABLE client;
+
+-- Réactiver les contraintes
+SET FOREIGN_KEY_CHECKS = 1;
+
+
+forage_exam

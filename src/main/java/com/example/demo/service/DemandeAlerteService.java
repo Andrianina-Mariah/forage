@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -117,16 +118,22 @@ public class DemandeAlerteService {
 		LocalDate dernierJour = fin.toLocalDate();
 
 		while (!jour.isAfter(dernierJour)) {
-			LocalDateTime debutJour = LocalDateTime.of(jour, HEURE_DEBUT_TRAVAIL);
-			LocalDateTime finJour = LocalDateTime.of(jour, HEURE_FIN_TRAVAIL);
-			LocalDateTime debutEffectif = debut.isAfter(debutJour) ? debut : debutJour;
-			LocalDateTime finEffectif = fin.isBefore(finJour) ? fin : finJour;
+			// === AJOUT : sauter le samedi (6) et dimanche (7) ===
+			java.time.DayOfWeek jourSemaine = jour.getDayOfWeek();
+			if (jourSemaine != DayOfWeek.SATURDAY && jourSemaine != DayOfWeek.SUNDAY) {
+				LocalDateTime debutJour = LocalDateTime.of(jour, HEURE_DEBUT_TRAVAIL);
+				LocalDateTime finJour = LocalDateTime.of(jour, HEURE_FIN_TRAVAIL);
+				LocalDateTime debutEffectif = debut.isAfter(debutJour) ? debut : debutJour;
+				LocalDateTime finEffectif = fin.isBefore(finJour) ? fin : finJour;
 
-			if (finEffectif.isAfter(debutEffectif)) {
-				total += Duration.between(debutEffectif, finEffectif).toMinutes();
+				if (finEffectif.isAfter(debutEffectif)) {
+					total += Duration.between(debutEffectif, finEffectif).toMinutes();
+				}
 			}
+			// === FIN AJOUT ===
 			jour = jour.plusDays(1);
 		}
+
 
 		return total;
 	}

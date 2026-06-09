@@ -108,3 +108,9 @@ Logique Affichage tsy any @ back
 
 70188b385b0c
 37450167
+
+
+liste demande 
+dans demande php même si je ne cherche pas de numéro de demande spécifique la liste de tout les demande avec leurs passage à cette statut de ce status là doit-être présent sous forme de tableau du coup
+je vais ajouter une nouvelle status forage terminée du coup quand une demande à ce statut dans le tableau qu'on va créer il faut mettre une colonne durée et il affiche là la total du durée de chaque statut de ce demande et ce n'est que quand c'est forage terminé qu'il affiche la durée qui ici va être exprimé en heure
+et il y a aussi une changement dans la table parametre il faut mettre chaque alerte maintenant dans une intervalle càd que par exemple de 80min à 150min c'est alerte jaune si ce n'est pas compris entre ses 2 intervalles c'est une autre alerte ou il n'y a pas d'alerte nb que 80 et 150 sont compris peux-tu me faire tout ça c'est les php du coup qu'il faut toucher et le service si je ne me trompe pas
